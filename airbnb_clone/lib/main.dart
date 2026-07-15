@@ -92,7 +92,9 @@ class AppColors {
   static const Color darkBackground = Color(0xFF0D0D0D);
   static const Color darkSurface = Color(0xFF1A1A1A);
 
-  static const Color accentRed = Color(0xFFE50914);
+  static const Color accentRed = Color(0xFFCD456A);
+  static const Color grey = Color.fromARGB(255, 180, 180, 180);
+  static const Color lightgrey = Color.fromARGB(255, 234, 234, 234);
 
   // Light theme colors
   static const Color lightBackground = Color(0xFFF5F5F5);
