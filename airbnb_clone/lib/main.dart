@@ -1,5 +1,4 @@
-import 'package:airbnb_clone/screens/home_screen.dart';
-import 'package:airbnb_clone/screens/login_screen.dart';
+import 'package:airbnb_clone/main_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
