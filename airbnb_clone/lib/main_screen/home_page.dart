@@ -47,9 +47,12 @@ class _homestate extends State<HomePage> {
             icon: FaIcon(FontAwesomeIcons.airbnb),
             label: "Trips",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.message), label: "Messages"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_2_outlined),
+            icon: Icon(Icons.message_outlined),
+            label: "Messages",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_outlined),
             label: "Profile",
           ),
         ],

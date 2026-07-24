@@ -1,5 +1,4 @@
 import 'package:airbnb_clone/main.dart';
-import 'package:airbnb_clone/sub_screen/explore_screen.dart';
 import 'package:airbnb_clone/main_screen/home_page.dart';
 import 'package:airbnb_clone/widgets/custom_field.dart';
 import 'package:flutter/material.dart';
