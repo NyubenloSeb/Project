@@ -30,7 +30,6 @@ class _homestate extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body: Center(child: _pageSelected.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(

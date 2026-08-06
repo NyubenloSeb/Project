@@ -19,7 +19,9 @@ class CustomField extends StatelessWidget {
                 borderSide: BorderSide(color: AppColors.grey, width: 1.2),
                 borderRadius: BorderRadius.circular(12),
               ),
+
               hintText: 'Phone Number or Email',
+              hintStyle: TextStyle(color: Colors.grey),
             ),
           ),
         ),

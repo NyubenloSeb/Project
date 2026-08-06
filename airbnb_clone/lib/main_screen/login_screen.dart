@@ -8,6 +8,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.lightgrey,
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
@@ -22,7 +23,11 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: 30),
             Text(
               "Log in or Sign up",
-              style: TextStyle(fontSize: 31, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 31,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
             SizedBox(height: 10),
             //TextField
@@ -52,7 +57,7 @@ class LoginScreen extends StatelessWidget {
             Row(
               children: <Widget>[
                 Expanded(child: Divider(color: AppColors.grey)),
-                Text("or", style: TextStyle(fontSize: 18)),
+                Text("or", style: TextStyle(fontSize: 18, color: Colors.black)),
                 Expanded(child: Divider(color: AppColors.grey)),
               ],
             ),

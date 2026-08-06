@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         brightness: Brightness.light,
 
-        scaffoldBackgroundColor: AppColors.lightBackground,
+        scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
 
         colorScheme: ColorScheme.light(
           primary: AppColors.accentRed,
@@ -35,50 +35,12 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
           elevation: 0,
-          centerTitle: true,
+          scrolledUnderElevation: 0,
         ),
 
         textTheme: const TextTheme(
           headlineLarge: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
           bodyMedium: TextStyle(fontSize: 14),
-        ),
-      ),
-
-      // ================= DARK THEME ===================
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.dark,
-
-        scaffoldBackgroundColor: AppColors.darkBackground,
-
-        colorScheme: ColorScheme.dark(
-          primary: AppColors.accentRed,
-          secondary: Colors.deepPurple,
-          onSecondary: Colors.white,
-          surface: AppColors.darkSurface,
-        ),
-
-        appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.darkBackground,
-          foregroundColor: Colors.white,
-          elevation: 0,
-          centerTitle: true,
-        ),
-
-        textTheme: const TextTheme(
-          headlineLarge: TextStyle(
-            fontSize: 26,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-          bodyMedium: TextStyle(fontSize: 14, color: Colors.white70),
-        ),
-
-        cardTheme: CardThemeData(
-          color: AppColors.darkSurface,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
         ),
       ),
     );
