@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const homeSchema = new Schema({
   name: { type: String },
   location: { type: String },
+  description: {type: String},
   images: { type: [String] },
   rating: { type: Number },
 });
