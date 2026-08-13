@@ -1,36 +1,36 @@
-const mongoose = require("moongoose");
-const Home = moongoose.model("homes");
+const mongoose = require("mongoose");
+const Home = mongoose.model("homes");
 
 module.exports = (app) => {
   // GET REQUEST(using express ) || read Homes
-  app.get("/api/v1/get/homes", async (req, res) => {
+  app.get("/api/v1/get/home", async (req, res) => {
     console.log("GET HOMES");
 
     try {
       const response = await Home.find();
-      res.status(201).json({ message: "Features Homes: ", response });
+      res.status(201).json({ message: "Featured Homes: ", response });
     } catch (error) {
       console.log("ERROR: ", error);
     }
   });
 
   app.post("/api/v1/add/home", async (req, res) => {
-    console.log("ADD A NEW HOME");
+    console.log("ADDED A NEW HOME");
 
-    const { title, imageUrl, description, rating, location } = req.body;
+    const { name, location, description, image, rating } = req.body;
 
     try {
-      const home = await Home.findOne({ title }); //check if the home alredy exists
+      const home = await Home.findOne({ name }); //check if the home already exists
       if (home) {
         res.status(400).json({ message: "Home already exist!" });
       }
 
       homeFields = {
-        title,
-        imageUrl,
-        description,
-        ratings,
+        name,
         location,
+        description,
+        image,
+        rating,
       };
 
       const response = await Home.create(homeFields);

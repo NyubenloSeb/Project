@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 require("./models/Homes");
 
 //routes
-require("./routes/homesRoutes");
+require("./routes/homeRoutes")(app);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
