@@ -217,9 +217,12 @@ class ProfileScreen extends StatelessWidget {
                               fontSize: 18,
                             ),
                           ),
-                          Text(
-                            "It's easy to start hosting and earn extra income",
-                            style: TextStyle(fontSize: 11),
+                          Container(
+                            padding: EdgeInsets.only(right: 10),
+                            child: Text(
+                              "It's easy to start hosting and earn extra income",
+                              style: TextStyle(fontSize: 11),
+                            ),
                           ),
                         ],
                       ),
