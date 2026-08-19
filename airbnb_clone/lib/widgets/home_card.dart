@@ -7,6 +7,7 @@ class HomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: 150,
       width: 150,
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -27,25 +28,15 @@ class HomeCard extends StatelessWidget {
                   left: 4,
                   right: 4,
                 ),
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: AlignmentGeometry.topCenter,
-                    colors: [
-                      Colors.black87,
-                      Colors.black54,
-                      Colors.transparent,
-                    ],
-                  ),
-                ),
-                child: Text(
-                  home.name,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                  ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Icon(
+                  Icons.favorite_border_outlined,
+                  color: Colors.white,
                 ),
               ),
             ),
