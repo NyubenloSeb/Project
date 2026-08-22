@@ -11,6 +11,7 @@ const homeSchema = new Schema({
   propertyDescription: { type: String },
   totalReviews: { type: String },
   perks: { type: String },
+  price: { type: Number },
 });
 
 mongoose.model("homes", homeSchema);
