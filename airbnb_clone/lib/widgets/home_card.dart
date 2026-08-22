@@ -1,3 +1,4 @@
+import 'package:airbnb_clone/main_screen/selection_page.dart';
 import 'package:airbnb_clone/models/home.dart';
 import 'package:flutter/material.dart';
 
@@ -6,38 +7,46 @@ class HomeCard extends StatelessWidget {
   const HomeCard({super.key, required this.home});
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 150,
-      width: 150,
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Image(image: NetworkImage(home.images[0]), fit: BoxFit.cover),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.only(
-                  top: 5,
-                  bottom: 10,
-                  left: 4,
-                  right: 4,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SelectionPage(home: home)),
+        );
+      },
+      child: SizedBox(
+        height: 150,
+        width: 150,
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image(image: NetworkImage(home.images[0]), fit: BoxFit.cover),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.only(
+                    top: 5,
+                    bottom: 10,
+                    left: 4,
+                    right: 4,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: Icon(
-                  Icons.favorite_border_outlined,
-                  color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Icon(
+                    Icons.favorite_border_outlined,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

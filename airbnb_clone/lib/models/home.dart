@@ -39,7 +39,7 @@ class Home {
       propertyDescription: json['propertyDescription'] ?? '',
       totalReviews: (json['totalReviews'] ?? 0).toDouble(),
       perks: json['perks'] ?? '',
-      price: (json['price'] ?? '').toDouble(),
+      price: (json['price'] ?? 0).toDouble(),
     );
   }
 }
