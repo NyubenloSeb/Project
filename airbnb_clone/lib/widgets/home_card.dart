@@ -14,10 +14,7 @@ class HomeCard extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Hero(
-              tag: home.images[0],
-              child: Image.network(home.images[0], fit: BoxFit.cover),
-            ),
+            Image(image: NetworkImage(home.images[0]), fit: BoxFit.cover),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(

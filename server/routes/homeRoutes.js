@@ -17,7 +17,18 @@ module.exports = (app) => {
   app.post("/api/v1/add/home", async (req, res) => {
     console.log("ADDED A NEW HOME");
 
-    const { name, location, description, image, rating } = req.body;
+    const {
+      name,
+      location,
+      description,
+      images,
+      rating,
+      hostName,
+      propertyDescription,
+      price,
+      perks,
+      totalReviews,
+    } = req.body;
 
     try {
       const home = await Home.findOne({ name }); //check if the home already exists
@@ -29,8 +40,13 @@ module.exports = (app) => {
         name,
         location,
         description,
-        image,
+        images,
         rating,
+        hostName,
+        propertyDescription,
+        totalReviews,
+        price,
+        perks,
       };
 
       const response = await Home.create(homeFields);

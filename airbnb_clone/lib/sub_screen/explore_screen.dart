@@ -25,21 +25,52 @@ class _ExploreScreenState extends State<ExploreScreen> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 160,
           automaticallyImplyLeading: false,
-          actions: [
-            Container(
-              height: 20,
-              decoration: BoxDecoration(color: Colors.amber),
-            ),
-          ],
-          bottom: const TabBar(
-            dividerColor: Colors.transparent,
-            indicatorColor: Colors.black,
+          flexibleSpace: Column(
+            children: [
+              SizedBox(height: 70),
+              Align(
+                alignment: AlignmentGeometry.centerStart,
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 30),
 
-            tabs: <Widget>[
-              Tab(text: "Homes", icon: Icon(Icons.home)),
-              Tab(text: "Experience", icon: Icon(Icons.explore)),
-              Tab(text: "Services", icon: Icon(Icons.room_service)),
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(60),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        spreadRadius: 1,
+                        blurRadius: 50,
+                        offset: Offset(0, 10),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.search),
+                        SizedBox(width: 5),
+                        Text("Start your search"),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              const TabBar(
+                dividerColor: Colors.transparent,
+                indicatorColor: Colors.black,
+
+                tabs: <Widget>[
+                  Tab(text: "Homes", icon: Icon(Icons.home)),
+                  Tab(text: "Experience", icon: Icon(Icons.explore)),
+                  Tab(text: "Services", icon: Icon(Icons.room_service)),
+                ],
+              ),
             ],
           ),
         ),

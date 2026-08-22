@@ -9,6 +9,7 @@ class Home {
   final String propertyDescription;
   final double totalReviews;
   final String perks;
+  final double price;
 
   Home({
     this.id,
@@ -21,6 +22,7 @@ class Home {
     required this.propertyDescription,
     required this.totalReviews,
     required this.perks,
+    required this.price,
   });
 
   //fromJson: create dart object from json recieved via the api
@@ -37,6 +39,7 @@ class Home {
       propertyDescription: json['propertyDescription'] ?? '',
       totalReviews: (json['totalReviews'] ?? 0).toDouble(),
       perks: json['perks'] ?? '',
+      price: (json['price'] ?? '').toDouble(),
     );
   }
 }
