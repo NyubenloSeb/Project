@@ -7,7 +7,7 @@ class Home {
   final double rating;
   final String hostName;
   final String propertyDescription;
-  final int totalReviews;
+  final String totalReviews;
   final String perks;
 
   Home({

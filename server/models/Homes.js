@@ -9,7 +9,7 @@ const homeSchema = new Schema({
   rating: { type: Number },
   hostName: { type: String },
   propertyDescription: { type: String },
-  totalReviews: { type: Number },
+  totalReviews: { type: String },
   perks: { type: String },
 });
 
