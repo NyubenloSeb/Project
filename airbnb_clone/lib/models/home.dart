@@ -7,7 +7,7 @@ class Home {
   final double rating;
   final String hostName;
   final String propertyDescription;
-  final int totalReviews;
+  final double totalReviews;
   final String perks;
 
   Home({
@@ -35,7 +35,7 @@ class Home {
       rating: (json['rating'] ?? 0).toDouble(),
       hostName: json['hostName'] ?? '',
       propertyDescription: json['propertyDescription'] ?? '',
-      totalReviews: json['totalReviews'] ?? '',
+      totalReviews: (json['totalReviews'] ?? 0).toDouble(),
       perks: json['perks'] ?? '',
     );
   }
