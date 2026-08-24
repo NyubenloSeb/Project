@@ -1,30 +1,22 @@
-import 'package:airbnb_clone/main_screen/selection_page.dart';
-import 'package:airbnb_clone/models/home.dart';
+import 'package:airbnb_clone/models/experience.dart';
 import 'package:flutter/material.dart';
 
-class HomeCard extends StatefulWidget {
-  final Home home;
+class ExperienceCard extends StatefulWidget {
+  final Experience experience;
 
-  const HomeCard({super.key, required this.home});
+  const ExperienceCard({super.key, required this.experience});
 
   @override
-  State<HomeCard> createState() => _HomeCardState();
+  State<ExperienceCard> createState() => _ExperienceCardState();
 }
 
-class _HomeCardState extends State<HomeCard> {
+class _ExperienceCardState extends State<ExperienceCard> {
   bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SelectionPage(home: widget.home),
-          ),
-        );
-      },
+      onTap: () {},
       child: SizedBox(
         height: 150,
         width: 150,
@@ -34,7 +26,7 @@ class _HomeCardState extends State<HomeCard> {
             fit: StackFit.expand,
             children: [
               Image(
-                image: NetworkImage(widget.home.images[0]),
+                image: NetworkImage(widget.experience.images[0]),
                 fit: BoxFit.cover,
               ),
 

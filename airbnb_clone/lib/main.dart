@@ -1,4 +1,5 @@
 import 'package:airbnb_clone/main_screen/login_screen.dart';
+import 'package:airbnb_clone/providers/experience_provider.dart';
 import 'package:airbnb_clone/providers/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,9 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<HomeProvider>(create: (_) => HomeProvider()),
+        ChangeNotifierProvider<ExperienceProvider>(
+          create: (_) => ExperienceProvider(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -61,7 +65,7 @@ class AppColors {
   // change colors as per your preference
   static const Color darkBackground = Color(0xFF0D0D0D);
   static const Color darkSurface = Color(0xFF1A1A1A);
-
+  static const Color darkgrey = Color.fromARGB(255, 119, 119, 119);
   static const Color accentRed = Color(0xFFCD456A);
   static const Color grey = Color.fromARGB(255, 180, 180, 180);
   static const Color lightgrey = Color.fromARGB(255, 234, 234, 234);
