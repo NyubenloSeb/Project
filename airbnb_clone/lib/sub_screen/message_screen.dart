@@ -18,18 +18,18 @@ class _MessageScreenState extends State<MessageScreen> {
         actions: <Widget>[
           IconButton(icon: Icon(Icons.search), onPressed: () {}),
           IconButton(icon: Icon(Icons.settings_outlined), onPressed: () {}),
-          const SizedBox(width: 24),
+          SizedBox(width: 24),
         ],
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
 
-              const Text(
+              Text(
                 "Message",
                 style: TextStyle(
                   fontSize: 32.0,
@@ -37,14 +37,14 @@ class _MessageScreenState extends State<MessageScreen> {
                   color: Colors.black,
                 ),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
 
               Row(
                 children: [
                   _buildFilterChip('All'),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   _buildFilterChip('Travelling'),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   _buildFilterChip('Support'),
                 ],
               ),
@@ -53,8 +53,8 @@ class _MessageScreenState extends State<MessageScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 24),
-                      const Text(
+                      SizedBox(height: 24),
+                      Text(
                         "You don't have any messages",
                         style: TextStyle(
                           fontSize: 18.0,
@@ -62,7 +62,7 @@ class _MessageScreenState extends State<MessageScreen> {
                           color: Colors.black,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text(
                         "When you receive a new message, it will appear here.",
                         style: TextStyle(
@@ -91,7 +91,7 @@ class _MessageScreenState extends State<MessageScreen> {
         });
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         decoration: BoxDecoration(
           color: isSelected ? Colors.black : Colors.grey.shade200,
           borderRadius: BorderRadius.circular(24.0),
