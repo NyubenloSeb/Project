@@ -32,12 +32,43 @@ class _WishlistScreenState extends State<WishlistScreen> {
                 "Wishlists",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 28.0,
-                  color: Colors.black87,
+                  fontSize: 32.0,
+                  color: Colors.black,
                   letterSpacing: 1.2,
                 ),
               ),
               const SizedBox(height: 20),
+
+              Container(
+                width: 150.0,
+                height: 150.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 223, 213, 213),
+                    width: 2.0,
+                  ),
+                ),
+              ),
+              const Text(
+                "Recently viewed",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                  color: Colors.black,
+                ),
+              ),
+              Expanded(
+                child: Center(
+                  child: Text(
+                    "Nothing added to the wishlist add to view",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: const Color.fromARGB(255, 92, 88, 88),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
