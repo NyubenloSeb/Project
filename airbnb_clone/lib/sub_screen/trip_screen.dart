@@ -25,12 +25,15 @@ class _TripScreenState extends State<TripScreen> {
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 100.0),
               Expanded(
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Image.network(
+                        height: 200,
+                        "https://i.pinimg.com/736x/8c/11/4e/8c114ef2759b895083f4cd2886deb57f.jpg",
+                      ),
                       Text(
                         "Build the perfect trip",
                         textAlign: TextAlign.center,

@@ -92,7 +92,7 @@ class _ExperienceState extends State<ExperienceScreen> {
                             ),
                           ),
                           Text(
-                            "From ₹${(provider.experience[index].price).toString()}/night · ${provider.experience[index].rating}★",
+                            "From ₹${(provider.experience[index].price).toString()}/guest · ${provider.experience[index].rating}★",
                             style: TextStyle(
                               fontSize: 10,
                               color: const Color.fromARGB(255, 119, 119, 119),
@@ -152,7 +152,7 @@ class _ExperienceState extends State<ExperienceScreen> {
                             ),
                           ),
                           Text(
-                            "From ₹${(provider.experience[index].price).toString()}/night · ${provider.experience[index].rating}★",
+                            "From ₹${(provider.experience[index].price).toString()}/guest · ${provider.experience[index].rating}★",
                             style: TextStyle(
                               fontSize: 10,
                               color: const Color.fromARGB(255, 119, 119, 119),
@@ -201,7 +201,7 @@ class _ExperienceState extends State<ExperienceScreen> {
                           ),
                         ),
                         Text(
-                          "From ₹${(provider.experience[index].price).toString()}/night · ${provider.experience[index].rating}★",
+                          "From ₹${(provider.experience[index].price).toString()}/guest · ${provider.experience[index].rating}★",
                           style: TextStyle(
                             fontSize: 10,
                             color: const Color.fromARGB(255, 119, 119, 119),
