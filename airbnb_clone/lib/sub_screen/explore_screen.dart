@@ -1,6 +1,7 @@
 import 'package:airbnb_clone/providers/home_provider.dart';
 import 'package:airbnb_clone/tab_screen/experience_screen.dart';
 import 'package:airbnb_clone/tab_screen/home_screen.dart';
+import 'package:airbnb_clone/tab_screen/services_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -80,7 +81,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
           children: <Widget>[
             HomeScreen(),
             ExperienceScreen(),
-            Center(child: Text("Service")),
+            ServicesScreen(),
           ],
         ),
       ),
