@@ -1,35 +1,33 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-//forcing the dns (windows issue)
+// DNS configuration
 const dns = require("node:dns/promises");
 dns.setServers(["1.1.1.1", "1.0.0.1"]);
 
 require("dotenv").config();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 5001;
 
-//connect to the database
 mongoose
-  .connect(process.env.MONGO_URI, {})
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((err) => {
-    console.log("Error connecting to MongoDB: ", err);
-  });
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.log("MongoDB error:", err.message));
 
 const app = express();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//models
+// Models
 require("./models/Homes");
 require("./models/Experience");
+require("./models/Users");
 
-//routes
+// Routes
 require("./routes/homeRoutes")(app);
 require("./routes/experienceRoutes")(app);
+app.use("/api/auth", require("./routes/authRoutes"));
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

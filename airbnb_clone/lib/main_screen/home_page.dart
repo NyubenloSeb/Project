@@ -7,19 +7,23 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String? userName;
+
+  const HomePage({super.key, this.userName});
+
   @override
   State<HomePage> createState() => _homestate();
 }
 
 class _homestate extends State<HomePage> {
   int _selectedIndex = 0;
-  static const List<Widget> _pageSelected = <Widget>[
+
+  List<Widget> get _pageSelected => [
     ExploreScreen(),
     WishlistScreen(),
     TripScreen(),
     MessageScreen(),
-    ProfileScreen(),
+    ProfileScreen(userName: widget.userName),
   ];
 
   void _onItemTapped(int index) {

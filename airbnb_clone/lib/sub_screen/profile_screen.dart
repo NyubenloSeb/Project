@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  final String? userName;
+
+  const ProfileScreen({super.key, this.userName});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +50,9 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            "N",
+                            userName?.isNotEmpty == true
+                                ? userName![0].toUpperCase()
+                                : "G",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
@@ -58,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Name",
+                        userName ?? "Guest",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
@@ -280,11 +284,22 @@ class ProfileScreen extends StatelessWidget {
               trailing: Icon(Icons.arrow_forward_ios),
               leading: Icon(Icons.person),
             ),
+
             ListTile(
-              contentPadding: EdgeInsets.only(left: 20, right: 20, top: 10),
-              title: Text("Logout"),
-              leading: Icon(Icons.door_back_door_outlined),
+              contentPadding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 10,
+              ),
+              title: const Text("Logout"),
+              leading: const Icon(Icons.door_back_door_outlined),
+              onTap: () {
+                Navigator.of(
+                  context,
+                ).pushNamedAndRemoveUntil('/', (route) => false);
+              },
             ),
+
             SizedBox(height: 20),
           ],
         ),
