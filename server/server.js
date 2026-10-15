@@ -23,10 +23,12 @@ app.use(express.urlencoded({ extended: true }));
 require("./models/Homes");
 require("./models/Experience");
 require("./models/Users");
+require("./models/Service");
 
 // Routes
 require("./routes/homeRoutes")(app);
 require("./routes/experienceRoutes")(app);
+require("./routes/serviceRoutes")(app);
 app.use("/api/auth", require("./routes/authRoutes"));
 
 app.listen(port, () => {

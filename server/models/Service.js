@@ -12,4 +12,4 @@ const serviceSchema = new Schema({
   price: { type: Number },
 });
 
-mongoose.model("serivce", serviceSchema);
+mongoose.model("service", serviceSchema);
