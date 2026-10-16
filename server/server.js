@@ -30,6 +30,6 @@ require("./routes/experienceRoutes")(app);
 require("./routes/serviceRoutes")(app);
 app.use("/api/auth", require("./routes/authRoutes"));
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`Server is running on port ${port}`);
 });
