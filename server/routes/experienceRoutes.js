@@ -20,6 +20,7 @@ module.exports = (app) => {
     const {
       name,
       location,
+      photo,
       description,
       images,
       rating,
@@ -39,6 +40,7 @@ module.exports = (app) => {
       experienceFields = {
         name,
         location,
+        photo,
         description,
         images,
         rating,

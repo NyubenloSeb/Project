@@ -1,3 +1,4 @@
+import 'package:airbnb_clone/main_screen/exp_selection_page.dart';
 import 'package:airbnb_clone/models/experience.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,15 @@ class _ExperienceCardState extends State<ExperienceCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                ExpSelectionPage(experience: widget.experience),
+          ),
+        );
+      },
       child: SizedBox(
         height: 150,
         width: 150,

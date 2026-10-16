@@ -15,7 +15,6 @@ mongoose
   .catch((err) => console.log("MongoDB error:", err.message));
 
 const app = express();
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
