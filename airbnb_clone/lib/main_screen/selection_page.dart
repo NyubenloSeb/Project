@@ -1,5 +1,6 @@
 import 'package:airbnb_clone/main.dart';
 import 'package:airbnb_clone/models/home.dart';
+import 'package:airbnb_clone/sub_screen/review_booking_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -911,19 +912,29 @@ class SelectionPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Container(
-                    height: 50,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      color: AppColors.accentRed,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Reserve",
-                        style: GoogleFonts.montserrat(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ReviewBookingScreen(home: home),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        color: AppColors.accentRed,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Reserve",
+                          style: GoogleFonts.montserrat(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
