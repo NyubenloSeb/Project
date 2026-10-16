@@ -27,7 +27,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 160,
+          toolbarHeight: 180,
           automaticallyImplyLeading: false,
           flexibleSpace: Column(
             children: [

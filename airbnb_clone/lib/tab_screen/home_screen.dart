@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 10),
                 Container(
-                  height: 200,
+                  height: 210,
                   child: ListView.separated(
                     padding: EdgeInsets.only(left: 15),
                     scrollDirection: Axis.horizontal,
@@ -69,7 +69,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         HomeCard(home: provider.homes[index]),
-                        Text(provider.homes[index].name),
+                        SizedBox(
+                          width: 150,
+                          child: Text(
+                            provider.homes[index].name,
+                            softWrap: true,
+                          ),
+                        ),
                         Text(
                           "From ₹${(provider.homes[index].price).toString()}/night · ${provider.homes[index].rating}★",
                           style: TextStyle(
@@ -101,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 10),
                 Container(
-                  height: 200,
+                  height: 210,
                   child: ListView.separated(
                     padding: EdgeInsets.only(left: 15),
                     scrollDirection: Axis.horizontal,
@@ -110,7 +116,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         HomeCard(home: provider.homes[index]),
-                        Text(provider.homes[index].name),
+                        SizedBox(
+                          width: 150,
+                          child: Text(
+                            provider.homes[index].name,
+                            softWrap: true,
+                          ),
+                        ),
                         Text(
                           "From ₹${(provider.homes[index].price).toString()}/night · ${provider.homes[index].rating}★",
                           style: TextStyle(
@@ -142,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 10),
                 Container(
-                  height: 200,
+                  height: 210,
                   child: ListView.separated(
                     padding: EdgeInsets.only(left: 15),
                     scrollDirection: Axis.horizontal,
@@ -151,7 +163,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         HomeCard(home: provider.homes[index]),
-                        Text(provider.homes[index].name),
+                        SizedBox(
+                          width: 150,
+                          child: Text(
+                            provider.homes[index].name,
+                            softWrap: true,
+                          ),
+                        ),
                         Text(
                           "From ₹${(provider.homes[index].price).toString()}/night · ${provider.homes[index].rating}★",
                           style: TextStyle(
@@ -183,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 10),
                 Container(
-                  height: 200,
+                  height: 210,
                   child: ListView.separated(
                     padding: EdgeInsets.only(left: 15),
                     scrollDirection: Axis.horizontal,
@@ -192,7 +210,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         HomeCard(home: provider.homes[index]),
-                        Text(provider.homes[index].name),
+                        SizedBox(
+                          width: 150,
+                          child: Text(
+                            provider.homes[index].name,
+                            softWrap: true,
+                          ),
+                        ),
                         Text(
                           "From ₹${(provider.homes[index].price).toString()}/night · ${provider.homes[index].rating}★",
                           style: TextStyle(

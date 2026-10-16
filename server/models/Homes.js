@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const homeSchema = new Schema({
   name: { type: String },
+  photo: { type: String },
   location: { type: String },
   description: { type: String },
   images: { type: [String] },
@@ -10,7 +11,7 @@ const homeSchema = new Schema({
   hostName: { type: String },
   propertyDescription: { type: String },
   totalReviews: { type: Number },
-  perks: { type: String },
+  perks: { type: [String] },
   price: { type: Number },
 });
 

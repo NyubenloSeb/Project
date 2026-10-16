@@ -1,6 +1,7 @@
 class Home {
   final String? id;
   final String name;
+  final String photo;
   final String location;
   final String description;
   final List<String> images;
@@ -8,12 +9,13 @@ class Home {
   final String hostName;
   final String propertyDescription;
   final double totalReviews;
-  final String perks;
+  final List<String> perks;
   final double price;
 
   Home({
     this.id,
     required this.name,
+    required this.photo,
     required this.location,
     required this.description,
     required this.images,
@@ -31,6 +33,7 @@ class Home {
     return Home(
       id: json['_id'],
       name: json['name'] ?? '',
+      photo: json['photo'] ?? '',
       location: json['location'] ?? '',
       description: json['description'] ?? '',
       images: List<String>.from(json['images']),
@@ -38,7 +41,7 @@ class Home {
       hostName: json['hostName'] ?? '',
       propertyDescription: json['propertyDescription'] ?? '',
       totalReviews: (json['totalReviews'] ?? 0).toDouble(),
-      perks: json['perks'] ?? '',
+      perks: List<String>.from(json['perks']),
       price: (json['price'] ?? 0).toDouble(),
     );
   }

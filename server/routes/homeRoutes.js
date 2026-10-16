@@ -19,6 +19,7 @@ module.exports = (app) => {
 
     const {
       name,
+      photo,
       location,
       description,
       images,
@@ -38,6 +39,7 @@ module.exports = (app) => {
 
       homeFields = {
         name,
+        photo,
         location,
         description,
         images,

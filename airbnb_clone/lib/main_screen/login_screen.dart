@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
 
-              const SizedBox(height: 210),
+              const SizedBox(height: 150),
 
               Image.network(
                 "https://logos-world.net/wp-content/uploads/2020/07/Airbnb-Emblem.png",
