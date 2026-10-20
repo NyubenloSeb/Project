@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:airbnb_clone/main.dart';
 import 'package:airbnb_clone/main_screen/home_page.dart';
 import 'package:airbnb_clone/widgets/custom_field.dart';
+import 'package:airbnb_clone/util/constants.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -22,7 +23,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:5001/api/auth/login'),
+        // Uri.parse('http://10.0.2.2:5001/api/auth/login'),
+        Uri.parse(awsUri),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'email': emailController.text.trim(),
