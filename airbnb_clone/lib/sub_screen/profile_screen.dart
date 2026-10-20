@@ -1,4 +1,8 @@
+import 'package:airbnb_clone/main_screen/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
+import 'package:airbnb_clone/providers/wishlist_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   final String? userName;
@@ -291,12 +295,10 @@ class ProfileScreen extends StatelessWidget {
                 right: 20,
                 top: 10,
               ),
-              title: const Text("Logout"),
+              title: const Text('Logout'),
               leading: const Icon(Icons.door_back_door_outlined),
-              onTap: () {
-                Navigator.of(
-                  context,
-                ).pushNamedAndRemoveUntil('/', (route) => false);
+              onTap: () async {
+                await _logout(context);
               },
             ),
 
@@ -306,4 +308,22 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> _logout(BuildContext context) async {
+  final prefs = await SharedPreferences.getInstance();
+
+  // Remove the login token
+  await prefs.remove('token');
+
+  // Clear the wishlist from memory
+  context.read<WishlistProvider>().clearWishlist();
+
+  if (!context.mounted) return;
+
+  // Navigate to LoginScreen and remove previous pages
+  Navigator.of(context).pushAndRemoveUntil(
+    MaterialPageRoute(builder: (context) => const LoginScreen()),
+    (route) => false,
+  );
 }

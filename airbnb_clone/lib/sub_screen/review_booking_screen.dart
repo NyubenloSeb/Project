@@ -14,7 +14,10 @@ class ReviewBookingScreen extends StatefulWidget {
 class _ReviewBookingScreenState extends State<ReviewBookingScreen> {
   late DateTimeRange dates;
   int guests = 1;
-  final double totalPrice = 89.23;
+  double get totalPrice {
+    final days = dates.end.difference(dates.start).inDays;
+    return widget.home.price * days;
+  }
 
   static const months = [
     'Jan',
@@ -235,13 +238,10 @@ class _ReviewBookingScreenState extends State<ReviewBookingScreen> {
                         const Divider(),
                         detailRow(
                           'Total Price',
-                          '\$${totalPrice.toStringAsFixed(2)} including taxes',
+                          '₹${totalPrice.toStringAsFixed(2)} for '
+                              '${dates.end.difference(dates.start).inDays} nights',
                           () => ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                'Price is currently a placeholder.',
-                              ),
-                            ),
+                            SnackBar(content: Text('₹${home.price} per night')),
                           ),
                         ),
                         const SizedBox(height: 20),

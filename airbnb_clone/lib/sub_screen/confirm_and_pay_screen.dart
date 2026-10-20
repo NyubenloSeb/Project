@@ -85,13 +85,7 @@ class ConfirmAndPayScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final nights = dates.end.difference(dates.start).inDays;
     final nightlyPrice = nights > 0 ? totalPrice / nights : totalPrice;
-    final symbol = currency == 'GBP'
-        ? '£'
-        : currency == 'INR'
-        ? '₹'
-        : currency == 'EUR'
-        ? '€'
-        : '\$';
+    final symbol = '₹';
 
     return Scaffold(
       backgroundColor: Colors.white,

@@ -22,10 +22,14 @@ const userSchema = new mongoose.Schema(
       enum: ["user"],
       default: "user",
     },
+    wishlist: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "homes",
+      },
+    ],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-module.exports =
-  mongoose.models.users ||
-  mongoose.model("users", userSchema);
+module.exports = mongoose.models.users || mongoose.model("users", userSchema);

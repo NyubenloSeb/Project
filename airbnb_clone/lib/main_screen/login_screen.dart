@@ -5,6 +5,9 @@ import 'package:airbnb_clone/main.dart';
 import 'package:airbnb_clone/main_screen/home_page.dart';
 import 'package:airbnb_clone/widgets/custom_field.dart';
 import 'package:airbnb_clone/util/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:airbnb_clone/providers/wishlist_provider.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,7 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       final response = await http.post(
-        // Uri.parse('http://10.0.2.2:5001/api/auth/login'),
         Uri.parse(awsUri),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
@@ -37,6 +39,27 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
 
       if (response.statusCode == 200) {
+        final token = data['token'];
+
+        if (token == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Login token missing from server')),
+          );
+          return;
+        }
+
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', token);
+
+        if (!mounted) return;
+
+        final wishlistProvider = context.read<WishlistProvider>();
+
+        wishlistProvider.clearWishlist();
+        await wishlistProvider.fetchWishlist();
+
+        if (!mounted) return;
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

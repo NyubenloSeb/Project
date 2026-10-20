@@ -2,6 +2,7 @@ import 'package:airbnb_clone/main_screen/login_screen.dart';
 import 'package:airbnb_clone/providers/experience_provider.dart';
 import 'package:airbnb_clone/providers/home_provider.dart';
 import 'package:airbnb_clone/providers/service_provider.dart';
+import 'package:airbnb_clone/providers/wishlist_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,7 @@ void main() {
         ChangeNotifierProvider<ServiceProvider>(
           create: (_) => ServiceProvider(),
         ),
+        ChangeNotifierProvider(create: (_) => WishlistProvider()),
       ],
       child: const MyApp(),
     ),
