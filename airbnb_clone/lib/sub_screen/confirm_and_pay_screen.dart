@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:airbnb_clone/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:airbnb_clone/models/home.dart';
 import 'package:airbnb_clone/sub_screen/reservation_confirmed_screen.dart';
@@ -79,6 +83,62 @@ class ConfirmAndPayScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> createBooking(BuildContext context) async {
+    if (home.id == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Property ID is missing.')));
+      return;
+    }
+
+    try {
+      const storage = FlutterSecureStorage();
+      final token = await storage.read(key: 'jwt_token');
+
+      if (token == null) {
+        throw Exception('Please log in again.');
+      }
+
+      final response = await http.post(
+        Uri.parse('$baseUrl/bookings'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({
+          'homeId': home.id,
+          'checkIn': dates.start.toIso8601String(),
+          'checkOut': dates.end.toIso8601String(),
+          'guests': guests,
+        }),
+      );
+
+      if (!context.mounted) return;
+
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 201) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Booking created successfully.')),
+        );
+
+        Navigator.popUntil(context, (route) => route.isFirst);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(data['message'] ?? 'Unable to create booking.'),
+          ),
+        );
+      }
+    } catch (e) {
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString().replaceFirst('Exception: ', ''))),
+      );
+    }
   }
 
   @override
@@ -289,20 +349,7 @@ class ConfirmAndPayScreen extends StatelessWidget {
                     width: double.infinity,
                     height: 70,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => ReservationConfirmedScreen(
-                              home: home,
-                              dates: dates,
-                              guests: guests,
-                              totalPrice: totalPrice,
-                              currency: currency,
-                            ),
-                          ),
-                        );
-                      },
+                      onPressed: () => createBooking(context),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF111111),
                         foregroundColor: Colors.white,

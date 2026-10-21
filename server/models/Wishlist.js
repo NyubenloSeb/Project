@@ -1,18 +1,39 @@
+
 const mongoose = require("mongoose");
 
-const wishlistSchema = new mongoose.Schema({
+const bookingSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
     required: true
   },
-  home: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Homes",
+  listingType: {
+    type: String,
+    enum: ["home", "experience", "service"],
     required: true
+  },
+  listingId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  },
+  checkIn: Date,
+  checkOut: Date,
+  bookingDate: Date,
+  guests: {
+    type: Number,
+    required: true,
+    min: 1
+  },
+  totalPrice: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  status: {
+    type: String,
+    enum: ["pending", "confirmed", "cancelled"],
+    default: "pending"
   }
 }, { timestamps: true });
 
-wishlistSchema.index({ user: 1, home: 1 }, { unique: true });
-
-module.exports = mongoose.model("Wishlist", wishlistSchema);
+module.exports = mongoose.model("Booking", bookingSchema);

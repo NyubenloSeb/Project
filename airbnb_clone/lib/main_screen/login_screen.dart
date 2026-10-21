@@ -8,6 +8,7 @@ import 'package:airbnb_clone/util/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:airbnb_clone/providers/wishlist_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -42,14 +43,17 @@ class _LoginScreenState extends State<LoginScreen> {
         final token = data['token'];
 
         if (token == null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Login token missing from server')),
-          );
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('token', token);
+
+          const storage = FlutterSecureStorage();
+          await storage.write(key: 'jwt_token', value: token);
           return;
         }
 
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('token', token);
+        const storage = FlutterSecureStorage();
+
+        await storage.write(key: 'jwt_token', value: token);
 
         if (!mounted) return;
 

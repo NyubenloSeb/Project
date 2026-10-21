@@ -38,7 +38,7 @@ class WishlistProvider extends ChangeNotifier {
       }
 
       final response = await http.get(
-        Uri.parse('$baseUrl/api/wishlist'),
+        Uri.parse('$baseUrl/wishlist'),
         headers: {'Authorization': 'Bearer $token'},
       );
 
@@ -76,7 +76,7 @@ class WishlistProvider extends ChangeNotifier {
     }
 
     final wasSaved = isWishlisted(home);
-    final uri = Uri.parse('$baseUrl/api/wishlist/${home.id}');
+    final uri = Uri.parse('$baseUrl/wishlist/${home.id}');
 
     try {
       final response = wasSaved
