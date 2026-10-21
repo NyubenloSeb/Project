@@ -57,10 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         if (!mounted) return;
 
-        final wishlistProvider = context.read<WishlistProvider>();
-
-        wishlistProvider.clearWishlist();
-        await wishlistProvider.fetchWishlist();
+        await context.read<WishlistProvider>().fetchWishlist();
 
         if (!mounted) return;
 
