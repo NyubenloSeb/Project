@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:airbnb_clone/main_screen/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   final String? userName;
@@ -68,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
                           fontSize: 24,
                         ),
                       ),
-                      Text("Guest", style: TextStyle(fontSize: 11)),
+                      // Text("Guest", style: TextStyle(fontSize: 11)),
                     ],
                   ),
                 ),
@@ -293,10 +296,19 @@ class ProfileScreen extends StatelessWidget {
               ),
               title: const Text("Logout"),
               leading: const Icon(Icons.door_back_door_outlined),
-              onTap: () {
-                Navigator.of(
-                  context,
-                ).pushNamedAndRemoveUntil('/', (route) => false);
+              onTap: () async {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.remove('token');
+
+                const storage = FlutterSecureStorage();
+                await storage.delete(key: 'jwt_token');
+
+                if (!context.mounted) return;
+
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_) => LoginScreen()),
+                  (route) => false,
+                );
               },
             ),
 

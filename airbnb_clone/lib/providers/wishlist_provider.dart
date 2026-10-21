@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:airbnb_clone/models/home.dart';
 import 'package:airbnb_clone/util/constants.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class WishlistProvider extends ChangeNotifier {
   List<Home> _wishlist = [];
@@ -20,7 +21,14 @@ class WishlistProvider extends ChangeNotifier {
 
   Future<String?> _getToken() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token');
+    final token = prefs.getString('token');
+
+    if (token != null && token.isNotEmpty) {
+      return token;
+    }
+
+    const storage = FlutterSecureStorage();
+    return await storage.read(key: 'jwt_token');
   }
 
   Future<void> fetchWishlist() async {
@@ -38,7 +46,7 @@ class WishlistProvider extends ChangeNotifier {
       }
 
       final response = await http.get(
-        Uri.parse('$baseUrl/wishlist'),
+        Uri.parse('$baseUrl/api/wishlist'),
         headers: {'Authorization': 'Bearer $token'},
       );
 
@@ -76,8 +84,7 @@ class WishlistProvider extends ChangeNotifier {
     }
 
     final wasSaved = isWishlisted(home);
-    final uri = Uri.parse('$baseUrl/wishlist/${home.id}');
-
+    final uri = Uri.parse('$baseUrl/api/wishlist/${home.id}');
     try {
       final response = wasSaved
           ? await http.delete(uri, headers: {'Authorization': 'Bearer $token'})

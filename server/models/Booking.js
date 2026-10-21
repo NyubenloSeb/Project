@@ -8,7 +8,16 @@ const bookingSchema = new mongoose.Schema({
   },
   home: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Homes",
+    ref: "homes",
+    required: true
+  },
+  listingType: {
+    type: String,
+    default: "home"
+  },
+  listingId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "homes",
     required: true
   },
   checkIn: { type: Date, required: true },
@@ -18,7 +27,7 @@ const bookingSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: ["pending", "confirmed", "cancelled"],
-    default: "pending"
+    default: "confirmed"
   }
 }, { timestamps: true });
 

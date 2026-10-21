@@ -40,16 +40,13 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
 
       if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+
         final token = data['token'];
 
-        if (token == null) {
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString('token', token);
-
-          const storage = FlutterSecureStorage();
-          await storage.write(key: 'jwt_token', value: token);
-          return;
-        }
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', token);
+        await prefs.setString('userName', data['user']['name']);
 
         const storage = FlutterSecureStorage();
 

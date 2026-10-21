@@ -37,7 +37,7 @@ class _TripScreenState extends State<TripScreen> {
       }
 
       final response = await http.get(
-        Uri.parse('$baseUrl/bookings'),
+        Uri.parse('$baseUrl/api/bookings'),
         headers: {'Authorization': 'Bearer $token'},
       );
 
@@ -48,16 +48,62 @@ class _TripScreenState extends State<TripScreen> {
           loading = false;
         });
       } else {
+        debugPrint('Trips status: ${response.statusCode}');
+        debugPrint('Trips response: ${response.body}');
+
+        if (!mounted) return;
         setState(() {
-          error = 'Could not load your trips.';
+          error = 'Could not load your trips (${response.statusCode}).';
           loading = false;
         });
       }
-    } catch (_) {
+    } catch (e) {
+      debugPrint('Trips loading error: $e');
+
+      if (!mounted) return;
       setState(() {
-        error = 'Unable to connect to the server.';
+        error = 'Unable to load trips. Please retry.';
         loading = false;
       });
+    }
+  }
+
+  Future<void> cancelBooking(String bookingId) async {
+    try {
+      final token = await storage.read(key: 'jwt_token');
+
+      if (token == null || token.isEmpty) {
+        throw Exception('Please log in again.');
+      }
+
+      final response = await http.patch(
+        Uri.parse('$baseUrl/api/bookings/$bookingId/cancel'),
+        headers: {'Authorization': 'Bearer $token'},
+      );
+
+      if (response.statusCode == 200) {
+        await fetchBookings();
+
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Booking cancelled successfully.')),
+        );
+      } else {
+        final data = jsonDecode(response.body);
+        if (!mounted) return;
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(data['message'] ?? 'Failed to cancel booking.'),
+          ),
+        );
+      }
+    } catch (e) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Could not cancel booking: $e')));
     }
   }
 
@@ -115,21 +161,42 @@ class _TripScreenState extends State<TripScreen> {
 
                             return Card(
                               margin: const EdgeInsets.only(bottom: 16),
-                              child: ListTile(
-                                title: Text(
-                                  '${booking['listingType'] ?? 'Booking'}'
-                                      .toUpperCase(),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    ListTile(
+                                      title: Text(
+                                        booking['home'] is Map
+                                            ? booking['home']['name'] ?? 'Home'
+                                            : 'Home',
+                                      ),
+                                      subtitle: Text(
+                                        'Check-in: ${checkIn == null ? 'N/A' : checkIn.toLocal().toString().split(' ')[0]}\n'
+                                        'Check-out: ${checkOut == null ? 'N/A' : checkOut.toLocal().toString().split(' ')[0]}\n'
+                                        'Guests: ${booking['guests'] ?? 1}\n'
+                                        'Status: ${booking['status'] ?? 'confirmed'}',
+                                      ),
+                                      trailing: Text(
+                                        '₹${booking['totalPrice'] ?? 0}',
+                                      ),
+                                      isThreeLine: true,
+                                    ),
+                                    if (booking['status'] != 'cancelled')
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: TextButton(
+                                          onPressed: () => cancelBooking(
+                                            booking['_id'].toString(),
+                                          ),
+                                          style: TextButton.styleFrom(
+                                            foregroundColor: Colors.red,
+                                          ),
+                                          child: const Text('Cancel booking'),
+                                        ),
+                                      ),
+                                  ],
                                 ),
-                                subtitle: Text(
-                                  'Check-in: ${checkIn == null ? 'N/A' : checkIn.toLocal().toString().split(' ')[0]}\n'
-                                  'Check-out: ${checkOut == null ? 'N/A' : checkOut.toLocal().toString().split(' ')[0]}\n'
-                                  'Guests: ${booking['guests'] ?? 1}\n'
-                                  'Status: ${booking['status'] ?? 'pending'}',
-                                ),
-                                trailing: Text(
-                                  '£${booking['totalPrice'] ?? 0}',
-                                ),
-                                isThreeLine: true,
                               ),
                             );
                           },

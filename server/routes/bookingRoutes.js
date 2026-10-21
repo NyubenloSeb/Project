@@ -61,15 +61,16 @@ router.post("/", authMiddleware, async (req, res) => {
     const totalPrice = home.price * nights;
 
     const booking = await Booking.create({
-      user: req.userId,
-      listingType: "home",
-      listingId: home._id,
-      checkIn: start,
-      checkOut: end,
-      guests,
-      totalPrice,
-      status: "pending"
-    });
+  user: req.userId,
+  home: home._id,
+  listingType: "home",
+  listingId: home._id,
+  checkIn: start,
+  checkOut: end,
+  guests,
+  totalPrice,
+  status: "confirmed"
+});
 
     res.status(201).json({
       message: "Booking created.",
@@ -85,12 +86,47 @@ router.post("/", authMiddleware, async (req, res) => {
 router.get("/", authMiddleware, async (req, res) => {
   try {
     const bookings = await Booking.find({ user: req.userId })
+      .populate("home", "name")
       .sort({ createdAt: -1 });
 
     res.json({ bookings });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to fetch bookings." });
+  }
+});
+// Cancel a booking
+router.patch("/:id/cancel", authMiddleware, async (req, res) => {
+  try {
+    const booking = await Booking.findOne({
+      _id: req.params.id,
+      user: req.userId,
+    });
+
+    if (!booking) {
+      return res.status(404).json({
+        message: "Booking not found.",
+      });
+    }
+
+    if (booking.status === "cancelled") {
+      return res.status(400).json({
+        message: "Booking is already cancelled.",
+      });
+    }
+
+    booking.status = "cancelled";
+    await booking.save();
+
+    return res.status(200).json({
+      message: "Booking cancelled successfully.",
+      booking,
+    });
+  } catch (error) {
+    console.error("Cancellation error:", error);
+    return res.status(500).json({
+      message: "Failed to cancel booking.",
+    });
   }
 });
 

@@ -97,12 +97,14 @@ class ConfirmAndPayScreen extends StatelessWidget {
       const storage = FlutterSecureStorage();
       final token = await storage.read(key: 'jwt_token');
 
-      if (token == null) {
+      if (token == null || token.isEmpty) {
         throw Exception('Please log in again.');
       }
 
+      final uri = Uri.parse('$baseUrl/api/bookings');
+
       final response = await http.post(
-        Uri.parse('$baseUrl/bookings'),
+        uri,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -115,23 +117,47 @@ class ConfirmAndPayScreen extends StatelessWidget {
         }),
       );
 
+      debugPrint('Booking URL: $uri');
+      debugPrint('Booking status: ${response.statusCode}');
+      debugPrint('Booking response: ${response.body}');
+
       if (!context.mounted) return;
 
-      final data = jsonDecode(response.body);
+      // Check the response before trying to decode it.
+      if (response.statusCode != 201) {
+        String message = 'Unable to create booking.';
 
-      if (response.statusCode == 201) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Booking created successfully.')),
-        );
+        try {
+          final data = jsonDecode(response.body);
+          if (data is Map && data['message'] != null) {
+            message = data['message'].toString();
+          } else {
+            message = 'Server returned status ${response.statusCode}.';
+          }
+        } catch (_) {
+          message =
+              'Server returned status ${response.statusCode}. '
+              'Check the Debug Console for details.';
+        }
 
-        Navigator.popUntil(context, (route) => route.isFirst);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(data['message'] ?? 'Unable to create booking.'),
-          ),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(message)));
+        return;
       }
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ReservationConfirmedScreen(
+            home: home,
+            dates: dates,
+            guests: guests,
+            totalPrice: totalPrice,
+            currency: currency,
+          ),
+        ),
+      );
     } catch (e) {
       if (!context.mounted) return;
 

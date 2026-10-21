@@ -38,13 +38,7 @@ class ReservationConfirmedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final nights = dates.end.difference(dates.start).inDays;
-    final symbol = currency == 'GBP'
-        ? '£'
-        : currency == 'INR'
-        ? '₹'
-        : currency == 'EUR'
-        ? '€'
-        : '\$';
+    const symbol = '₹';
 
     final taxes = totalPrice * 0.043;
     final stayPrice = totalPrice - taxes;
